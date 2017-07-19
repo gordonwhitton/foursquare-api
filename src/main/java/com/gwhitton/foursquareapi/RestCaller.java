@@ -12,11 +12,13 @@ public class RestCaller {
 
 	//based on example from https://www.mkyong.com/java/apache-httpclient-examples/
 
-	private final String USER_AGENT = "Mozilla/5.0"; //TODO modify to something sensible
+	private static final String USER_AGENT = "Mozilla/5.0"; //TODO modify to something sensible
 
-	public void performGet(String url){
+	public static String performGet(String url) throws RestCallerException{
 		//String url = "http://www.google.com/search?q=httpClient";
 
+		StringBuffer result = new StringBuffer();
+		
 		try{
 			HttpClient client = HttpClientBuilder.create().build();
 			HttpGet request = new HttpGet(url);
@@ -31,14 +33,16 @@ public class RestCaller {
 			BufferedReader rd = new BufferedReader(
 					new InputStreamReader(response.getEntity().getContent()));
 
-			StringBuffer result = new StringBuffer();
+			
 			String line = "";
 			while ((line = rd.readLine()) != null) {
 				result.append(line);
 			}
 
 		} catch (Throwable t){
-
+			throw new RestCallerException(t);
 		}
+		
+		return result.toString();
 	}
 }
