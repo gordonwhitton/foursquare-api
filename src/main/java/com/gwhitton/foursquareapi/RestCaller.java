@@ -13,9 +13,15 @@ public class RestCaller {
 	//based on example from https://www.mkyong.com/java/apache-httpclient-examples/
 
 	private static final String USER_AGENT = "Mozilla/5.0"; //TODO modify to something sensible
-
+	
+	/**
+	 * Performs HTTP GET on given URL.
+	 * 
+	 * @param url
+	 * @return String with JSON
+	 * @throws RestCallerException
+	 */
 	public static String performGet(String url) throws RestCallerException{
-		//String url = "http://www.google.com/search?q=httpClient";
 
 		StringBuffer result = new StringBuffer();
 		
@@ -27,13 +33,9 @@ public class RestCaller {
 			request.addHeader("User-Agent", USER_AGENT);
 			HttpResponse response = client.execute(request);
 
-			System.out.println("Response Code : "
-					+ response.getStatusLine().getStatusCode());
-
 			BufferedReader rd = new BufferedReader(
 					new InputStreamReader(response.getEntity().getContent()));
 
-			
 			String line = "";
 			while ((line = rd.readLine()) != null) {
 				result.append(line);
