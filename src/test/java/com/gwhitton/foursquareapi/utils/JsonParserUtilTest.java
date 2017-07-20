@@ -15,6 +15,15 @@ public class JsonParserUtilTest {
 	private static final String BASIC_JSON = 
 			"{\"response\": {\"venues\": [{\"name\": \"name1\"},{\"name\": \"name2\"},{\"name\": \"name3\"}]}}";
 
+	private static final String INVALID_JSON_1 = 
+			"{\"response\": \"venues\": [{\"name\": \"name1\"},{\"name\": \"name2\"},{\"name\": \"name3\"}]}}";
+	
+	private static final String INVALID_JSON_2 = 
+			"{\"response\": \"venues\": {\"name\": \"name1\"},{\"name\": \"name2\"},{\"name\": \"name3\"}]}}";
+	
+	private static final String INVALID_JSON_3 = 
+			"{\"response\": \"venues\": [{\"name\": \"name1\"},{\"name\": \"name2\"},{\"name\": \"name3\"}]}";
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -75,5 +84,20 @@ public class JsonParserUtilTest {
 	public void testGetValues() throws JasonParserUtilException {
 		List<String> result = JsonParserUtil.getValues(BASIC_JSON, "venues", "name");
 		assertTrue(result.contains("name1")&&result.contains("name2")&&result.contains("name3")&&result.size() == 3);
+	}
+	
+	@Test(expected = JasonParserUtilException.class)
+	public void testGetValuesInvalidJson1() throws JasonParserUtilException {
+		JsonParserUtil.getValues(INVALID_JSON_1, "venues", "name");
+	}
+	
+	@Test(expected = JasonParserUtilException.class)
+	public void testGetValuesInvalidJson2() throws JasonParserUtilException {
+		JsonParserUtil.getValues(INVALID_JSON_2, "venues", "name");
+	}
+	
+	@Test(expected = JasonParserUtilException.class)
+	public void testGetValuesInvalidJson3() throws JasonParserUtilException {
+		JsonParserUtil.getValues(INVALID_JSON_3, "venues", "name");
 	}
 }
