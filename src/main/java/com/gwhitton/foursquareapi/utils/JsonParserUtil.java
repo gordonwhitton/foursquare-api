@@ -29,7 +29,6 @@ public class JsonParserUtil {
 		}
 		
 		try{
-
 			List<String> result = new ArrayList<>();
 			JSONObject obj = new JSONObject(json);
 			JSONObject responseObject = obj.getJSONObject("response");
