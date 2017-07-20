@@ -9,3 +9,5 @@ Before being able to use this API, you will need to sign up for a Foursquare dev
 Once you have an account, create an app within the Foursquare website.  Once complete, you will need to obtain the CLIENT_ID and CLIENT_SECRET from your new app, to pass as arguments into the constructor of FourSquareApi.java.
 
 For convenience, I have included a demo cmd line app, the use of which should be self explanatory.
+
+PLEASE NOTE:  git is showing two different developers working on this - they are both me (I've been working on two different computers).
