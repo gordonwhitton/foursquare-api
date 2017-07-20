@@ -18,7 +18,7 @@ public class JsonParserUtil {
 	 * @return
 	 * @throws JasonParserUtilException
 	 */
-	public static List<String> getValues(String json, String subArrayName, String key) throws JasonParserUtilException{
+	public static List<String> getValues(String json, String subArrayName, String key) throws JsonParserUtilException{
 
 		if(json == null || subArrayName == null || key == null){
 			throw new IllegalArgumentException("parameter is null");
@@ -42,7 +42,7 @@ public class JsonParserUtil {
 			return result;
 
 		} catch (Throwable t){
-			throw new JasonParserUtilException(t);
+			throw new JsonParserUtilException(t);
 		}
 	}
 }

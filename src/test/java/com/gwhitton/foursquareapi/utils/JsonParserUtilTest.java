@@ -41,63 +41,63 @@ public class JsonParserUtilTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetValuesNull1() throws JasonParserUtilException {
+	public void testGetValuesNull1() throws JsonParserUtilException {
 		JsonParserUtil.getValues(null, "venues", "name");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetValuesNull2() throws JasonParserUtilException {
+	public void testGetValuesNull2() throws JsonParserUtilException {
 		JsonParserUtil.getValues(BASIC_JSON, null, "name");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetValuesNull3() throws JasonParserUtilException {
+	public void testGetValuesNull3() throws JsonParserUtilException {
 		JsonParserUtil.getValues(BASIC_JSON, "venues", null);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetValuesNull4() throws JasonParserUtilException {
+	public void testGetValuesNull4() throws JsonParserUtilException {
 		JsonParserUtil.getValues(null, null, null);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetValuesEmpty1() throws JasonParserUtilException {
+	public void testGetValuesEmpty1() throws JsonParserUtilException {
 		JsonParserUtil.getValues("", "venues", "name");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetValuesEmpty2() throws JasonParserUtilException {
+	public void testGetValuesEmpty2() throws JsonParserUtilException {
 		JsonParserUtil.getValues(BASIC_JSON, "", "name");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetValuesEmpty3() throws JasonParserUtilException {
+	public void testGetValuesEmpty3() throws JsonParserUtilException {
 		JsonParserUtil.getValues(BASIC_JSON, "venues", "");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testGetValuesEmpty4() throws JasonParserUtilException {
+	public void testGetValuesEmpty4() throws JsonParserUtilException {
 		JsonParserUtil.getValues("", "", "");
 	}
 	
 	@Test
-	public void testGetValues() throws JasonParserUtilException {
+	public void testGetValues() throws JsonParserUtilException {
 		List<String> result = JsonParserUtil.getValues(BASIC_JSON, "venues", "name");
 		assertTrue(result.contains("name1")&&result.contains("name2")&&result.contains("name3")&&result.size() == 3);
 	}
 	
-	@Test(expected = JasonParserUtilException.class)
-	public void testGetValuesInvalidJson1() throws JasonParserUtilException {
+	@Test(expected = JsonParserUtilException.class)
+	public void testGetValuesInvalidJson1() throws JsonParserUtilException {
 		JsonParserUtil.getValues(INVALID_JSON_1, "venues", "name");
 	}
 	
-	@Test(expected = JasonParserUtilException.class)
-	public void testGetValuesInvalidJson2() throws JasonParserUtilException {
+	@Test(expected = JsonParserUtilException.class)
+	public void testGetValuesInvalidJson2() throws JsonParserUtilException {
 		JsonParserUtil.getValues(INVALID_JSON_2, "venues", "name");
 	}
 	
-	@Test(expected = JasonParserUtilException.class)
-	public void testGetValuesInvalidJson3() throws JasonParserUtilException {
+	@Test(expected = JsonParserUtilException.class)
+	public void testGetValuesInvalidJson3() throws JsonParserUtilException {
 		JsonParserUtil.getValues(INVALID_JSON_3, "venues", "name");
 	}
 }
