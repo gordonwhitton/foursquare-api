@@ -14,11 +14,10 @@ public class JsonParserUtil {
 		try{
 
 			List<String> result = new ArrayList<>();
-			
 			JSONObject obj = new JSONObject(json);
-			//String pageName = obj.getJSONObject("pageInfo").getString("pageName");
-
-			JSONArray arr = obj.getJSONArray(subArrayName);
+			JSONObject responseObject = obj.getJSONObject("response");
+			JSONArray arr = responseObject.getJSONArray(subArrayName);
+			
 			for (int i = 0; i < arr.length(); i++)
 			{
 				result.add(arr.getJSONObject(i).getString(key));
