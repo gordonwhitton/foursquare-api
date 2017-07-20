@@ -12,6 +12,9 @@ import org.junit.Test;
 
 public class JsonParserUtilTest {
 
+	private static final String BASIC_JSON = 
+			"{\"response\": {\"venues\": [{\"name\": \"name1\"},{\"name\": \"name2\"},{\"name\": \"name3\"}]}}";
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -28,10 +31,49 @@ public class JsonParserUtilTest {
 	public void tearDown() throws Exception {
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetValuesNull1() throws JasonParserUtilException {
+		JsonParserUtil.getValues(null, "venues", "name");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetValuesNull2() throws JasonParserUtilException {
+		JsonParserUtil.getValues(BASIC_JSON, null, "name");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetValuesNull3() throws JasonParserUtilException {
+		JsonParserUtil.getValues(BASIC_JSON, "venues", null);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetValuesNull4() throws JasonParserUtilException {
+		JsonParserUtil.getValues(null, null, null);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetValuesEmpty1() throws JasonParserUtilException {
+		JsonParserUtil.getValues("", "venues", "name");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetValuesEmpty2() throws JasonParserUtilException {
+		JsonParserUtil.getValues(BASIC_JSON, "", "name");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetValuesEmpty3() throws JasonParserUtilException {
+		JsonParserUtil.getValues(BASIC_JSON, "venues", "");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetValuesEmpty4() throws JasonParserUtilException {
+		JsonParserUtil.getValues("", "", "");
+	}
+	
 	@Test
 	public void testGetValues() throws JasonParserUtilException {
-		String json = "{\"response\": {\"venues\": [{\"name\": \"name1\"},{\"name\": \"name2\"},{\"name\": \"name3\"}]}}";
-		List<String> result = JsonParserUtil.getValues(json, "venues", "name");
+		List<String> result = JsonParserUtil.getValues(BASIC_JSON, "venues", "name");
 		assertTrue(result.contains("name1")&&result.contains("name2")&&result.contains("name3")&&result.size() == 3);
 	}
 }

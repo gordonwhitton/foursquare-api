@@ -9,8 +9,25 @@ import org.json.JSONObject;
 
 public class JsonParserUtil {
 
+	/**
+	 * Returns values found in JSON as a list of Strings
+	 * 
+	 * @param json a correctly formatted JSON string
+	 * @param subArrayName e.g. in {"level0": {"level1": "name"}}, search for level1
+	 * @param key the key to search for in the given subArray
+	 * @return
+	 * @throws JasonParserUtilException
+	 */
 	public static List<String> getValues(String json, String subArrayName, String key) throws JasonParserUtilException{
 
+		if(json == null || subArrayName == null || key == null){
+			throw new IllegalArgumentException("parameter is null");
+		}
+		
+		if(json.isEmpty() || subArrayName.isEmpty() || key.isEmpty()){
+			throw new IllegalArgumentException("parameter is empty");
+		}
+		
 		try{
 
 			List<String> result = new ArrayList<>();

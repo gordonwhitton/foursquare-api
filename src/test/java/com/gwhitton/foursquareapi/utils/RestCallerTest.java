@@ -18,8 +18,17 @@ import org.junit.Test;
 import com.gwhitton.foursquareapi.utils.RestCaller;
 import com.gwhitton.foursquareapi.utils.RestCallerException;
 
+/**
+ * 
+ * These tests require internet connectivity
+ * 
+ * @author Gordon
+ *
+ */
 public class RestCallerTest {
 
+	private static final String FOURSQUARE_VENUES_SEARCH_URL = 
+			"https://api.foursquare.com/v2/venues/search?near=%s&client_id=%s&client_secret=%s&v=%s&m=%s";
 	private static String clientID;
 	private static String clientSecret;
 	private static String version;
@@ -30,8 +39,6 @@ public class RestCallerTest {
 	public static void setUpBeforeClass() throws Exception {
 		Properties prop = new Properties();
 		InputStream input = null;
-		System.out.println("Working Directory = " +
-	              System.getProperty("user.dir"));
 		input = new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/config.properties");
 		prop.load(input);
 
@@ -53,15 +60,10 @@ public class RestCallerTest {
 	public void tearDown() throws Exception {
 	}
 
-	/**
-	 * This test requires internet connectivity
-	 * 
-	 * @throws RestCallerException
-	 */
 	@Test
 	public void testPerformGet() throws RestCallerException {
-		String url = String.format("https://api.foursquare.com/v2/venues/search?near=Chicago&client_id=%s&client_secret=%s&v=%s&m=%s", 
-				clientID, clientSecret, version, mode);
+		String nearValue = "Chicago";
+		String url = String.format(FOURSQUARE_VENUES_SEARCH_URL, nearValue, clientID, clientSecret, version, mode);
 		String result = RestCaller.performGet(url);
 		assertTrue(isJSONValid(result));
 	}
@@ -78,5 +80,4 @@ public class RestCallerTest {
 	    }
 	    return true;
 	}
-
 }
