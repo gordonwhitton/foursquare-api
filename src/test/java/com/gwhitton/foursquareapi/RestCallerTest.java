@@ -32,9 +32,12 @@ public class RestCallerTest {
 		final String CLIENT_ID = "FQUQDZ3UCYKME5UFS0ZB0DH2FJA0X34CYDYQNTUG5JR5PQDK";
 		final String CLIENT_SECRET = "5ECN0LW0F4S4P5GU0K4VMQTJS1204G2YICWQ1HRNYWC0HEWJ";
 		
+		final String VERSION = "20170719";
+		final String MODE = "foursquare";
+		
 		//String url = "https://api.foursquare.com/v2/venues/search?oauth_token=ACCESS_TOKEN&near=Chicago";
 		//String url = "https://api.foursquare.com/v2/venues/search?client_id=433756101&client_secret=Maidenhead2016#&near=Chicago";
-		String url = String.format("https://api.foursquare.com/v2/venues/search?near=Chicago&client_id=%s&client_secret=%s", CLIENT_ID, CLIENT_SECRET);
+		String url = String.format("https://api.foursquare.com/v2/venues/search?near=Chicago&client_id=%s&client_secret=%s&v=%s&m=%s", CLIENT_ID, CLIENT_SECRET, VERSION, MODE);
 
 		String result = RestCaller.performGet(url);
 		
