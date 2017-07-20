@@ -2,6 +2,13 @@ package com.gwhitton.foursquareapi.utils;
 
 import static org.junit.Assert.*;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Properties;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,8 +20,25 @@ import com.gwhitton.foursquareapi.utils.RestCallerException;
 
 public class RestCallerTest {
 
+	private static String clientID;
+	private static String clientSecret;
+	private static String version;
+	private static String mode;
+
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		Properties prop = new Properties();
+		InputStream input = null;
+		System.out.println("Working Directory = " +
+	              System.getProperty("user.dir"));
+		input = new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/config.properties");
+		prop.load(input);
+
+		clientID = prop.getProperty("clientID");
+		clientSecret = prop.getProperty("clientSecret");
+		version = prop.getProperty("version");
+		mode = prop.getProperty("mode");
 	}
 
 	@AfterClass
@@ -29,22 +53,30 @@ public class RestCallerTest {
 	public void tearDown() throws Exception {
 	}
 
+	/**
+	 * This test requires internet connectivity
+	 * 
+	 * @throws RestCallerException
+	 */
 	@Test
 	public void testPerformGet() throws RestCallerException {
-		
-		final String CLIENT_ID = "FQUQDZ3UCYKME5UFS0ZB0DH2FJA0X34CYDYQNTUG5JR5PQDK";
-		final String CLIENT_SECRET = "5ECN0LW0F4S4P5GU0K4VMQTJS1204G2YICWQ1HRNYWC0HEWJ";
-		
-		final String VERSION = "20170719";
-		final String MODE = "foursquare";
-		
-		String url = String.format("https://api.foursquare.com/v2/venues/search?near=Chicago&client_id=%s&client_secret=%s&v=%s&m=%s", CLIENT_ID, CLIENT_SECRET, VERSION, MODE);
-
+		String url = String.format("https://api.foursquare.com/v2/venues/search?near=Chicago&client_id=%s&client_secret=%s&v=%s&m=%s", 
+				clientID, clientSecret, version, mode);
 		String result = RestCaller.performGet(url);
-		
-		System.out.println(result);
-		
-		//fail("Not yet implemented");
+		assertTrue(isJSONValid(result));
+	}
+	
+	private static boolean isJSONValid(String json) {
+	    try {
+	        new JSONObject(json);
+	    } catch (JSONException ex) {
+	        try {
+	            new JSONArray(json);
+	        } catch (JSONException ex1) {
+	            return false;
+	        }
+	    }
+	    return true;
 	}
 
 }
