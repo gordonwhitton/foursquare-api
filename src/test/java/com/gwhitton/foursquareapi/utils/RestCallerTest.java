@@ -60,12 +60,27 @@ public class RestCallerTest {
 	public void tearDown() throws Exception {
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testPerformGetNull() throws RestCallerException {
+		RestCaller.performGet(null);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testPerformGetEmpty() throws RestCallerException {
+		RestCaller.performGet("");
+	}
+	
 	@Test
 	public void testPerformGet() throws RestCallerException {
-		String nearValue = "Chicago";
-		String url = String.format(FOURSQUARE_VENUES_SEARCH_URL, nearValue, clientID, clientSecret, version, mode);
-		String result = RestCaller.performGet(url);
-		assertTrue(isJSONValid(result));
+		String nearValue1 = "Chicago";
+		String url1 = String.format(FOURSQUARE_VENUES_SEARCH_URL, nearValue1, clientID, clientSecret, version, mode);
+		String result1 = RestCaller.performGet(url1);
+		assertTrue(isJSONValid(result1));
+		
+		String nearValue2 = "London";
+		String url2 = String.format(FOURSQUARE_VENUES_SEARCH_URL, nearValue2, clientID, clientSecret, version, mode);
+		String result2 = RestCaller.performGet(url2);
+		assertTrue(isJSONValid(result2));
 	}
 	
 	private static boolean isJSONValid(String json) {
