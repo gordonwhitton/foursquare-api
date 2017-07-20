@@ -1,4 +1,4 @@
-package com.gwhitton.foursquareapi;
+package com.gwhitton.foursquareapi.utils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

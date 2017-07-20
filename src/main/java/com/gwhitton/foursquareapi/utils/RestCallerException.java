@@ -1,4 +1,4 @@
-package com.gwhitton.foursquareapi;
+package com.gwhitton.foursquareapi.utils;
 
 public class RestCallerException extends Exception {
 

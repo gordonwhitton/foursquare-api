@@ -1,4 +1,4 @@
-package com.gwhitton.foursquareapi;
+package com.gwhitton.foursquareapi.utils;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,9 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.gwhitton.foursquareapi.utils.RestCaller;
+import com.gwhitton.foursquareapi.utils.RestCallerException;
 
 public class RestCallerTest {
 
@@ -35,8 +38,6 @@ public class RestCallerTest {
 		final String VERSION = "20170719";
 		final String MODE = "foursquare";
 		
-		//String url = "https://api.foursquare.com/v2/venues/search?oauth_token=ACCESS_TOKEN&near=Chicago";
-		//String url = "https://api.foursquare.com/v2/venues/search?client_id=433756101&client_secret=Maidenhead2016#&near=Chicago";
 		String url = String.format("https://api.foursquare.com/v2/venues/search?near=Chicago&client_id=%s&client_secret=%s&v=%s&m=%s", CLIENT_ID, CLIENT_SECRET, VERSION, MODE);
 
 		String result = RestCaller.performGet(url);
