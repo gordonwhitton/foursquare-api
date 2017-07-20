@@ -1,6 +1,5 @@
 package com.gwhitton.foursquareapi;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.gwhitton.foursquareapi.utils.JsonParserUtil;
